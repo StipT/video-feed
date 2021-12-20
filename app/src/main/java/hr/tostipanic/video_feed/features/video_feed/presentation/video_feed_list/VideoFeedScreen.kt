@@ -1,4 +1,4 @@
-package hr.tostipanic.video_feed.features.video_feed_list.presentation
+package hr.tostipanic.video_feed.features.video_feed.presentation.video_feed_list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +33,7 @@ fun VideoFeedScreen(
                 VideoFeedItem(
                     videoPost = videoPost,
                     onItemClick = {
-                        navController.navigate(Screen.VideoScreen.route + "/${videoPost}")
+                        navController.navigate(Screen.VideoPlayerScreen.route + "/${videoPost.id}")
                     }
                 )
             }

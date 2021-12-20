@@ -1,4 +1,4 @@
-package hr.tostipanic.video_feed.features.video_feed_list.presentation
+package hr.tostipanic.video_feed.features.video_feed.presentation.video_feed_list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -14,12 +14,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import hr.tostipanic.video_feed.features.video_feed_list.data.remote.response.VideoPost
+import hr.tostipanic.video_feed.features.video_feed.domain.model.Video
 
 @Composable
 fun VideoFeedItem(
-    videoPost: VideoPost,
-    onItemClick: (VideoPost) -> Unit
+    videoPost: Video,
+    onItemClick: (Video) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -61,7 +61,7 @@ fun VideoFeedItem(
             )
         }
         Image(
-            painter = rememberImagePainter(data = videoPost.video?.poster),
+            painter = rememberImagePainter(data = videoPost.poster),
             contentDescription = "thumbnail",
             contentScale = ContentScale.Crop,
             modifier = Modifier

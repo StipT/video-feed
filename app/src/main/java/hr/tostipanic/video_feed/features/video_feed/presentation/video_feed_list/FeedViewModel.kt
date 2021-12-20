@@ -1,12 +1,12 @@
-package hr.tostipanic.video_feed.features.video_feed_list.presentation
+package hr.tostipanic.video_feed.features.video_feed.presentation.video_feed_list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hr.tostipanic.video_feed.features.video_feed_list.domain.use_case.GetVideoFeedUseCase
-import hr.tostipanic.video_feed.features.video_feed_list.domain.model.wrapper.Resource
+import hr.tostipanic.video_feed.features.video_feed.domain.model.wrapper.Resource
+import hr.tostipanic.video_feed.features.video_feed.domain.use_case.GetVideoFeedUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
