@@ -1,4 +1,4 @@
-package hr.tostipanic.video_feed.features.video_feed_list.domain.model.wrapper
+package hr.tostipanic.video_feed.features.video_feed.domain.model.wrapper
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : Resource<T>(data)

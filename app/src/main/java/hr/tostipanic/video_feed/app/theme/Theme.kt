@@ -1,4 +1,4 @@
-package hr.tostipanic.video_feed.app
+package hr.tostipanic.video_feed.app.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

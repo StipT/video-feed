@@ -9,7 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hr.tostipanic.video_feed.features.video_feed_list.presentation.VideoFeedScreen
+import hr.tostipanic.video_feed.app.theme.AppTheme
+import hr.tostipanic.video_feed.features.video_feed.presentation.video_feed_list.VideoFeedScreen
+import hr.tostipanic.video_feed.features.video_feed.presentation.video_player.VideoPlayerScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -30,9 +32,9 @@ class MainActivity : ComponentActivity() {
                             VideoFeedScreen(navController)
                         }
                         composable(
-                            route = Screen.VideoScreen.route + "/{videoId}"
+                            route = Screen.VideoPlayerScreen.route + "/{videoId}"
                         ) {
-                       //     VideoScreen()
+                            VideoPlayerScreen()
                         }
                     }
                 }
