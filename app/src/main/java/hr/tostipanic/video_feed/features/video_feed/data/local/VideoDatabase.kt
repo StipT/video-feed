@@ -10,7 +10,7 @@ import hr.tostipanic.video_feed.features.video_feed.domain.model.Video
 )
 abstract class VideoDatabase : RoomDatabase() {
 
-    abstract val noteDao: VideoDao
+    abstract val videoDao: VideoDao
 
     companion object {
         const val DATABASE_NAME = "video_database"

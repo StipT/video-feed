@@ -17,10 +17,10 @@ class FeedRepositoryImpl @Inject constructor(
     }
 
     override suspend fun storeFeed(feed: List<Video>) {
-        return videoDatabase.noteDao.storeFeed(feed)
+        return videoDatabase.videoDao.storeFeed(feed)
     }
 
     override suspend fun getVideoById(id: Int): Video? {
-        return videoDatabase.noteDao.getVideoById(id)
+        return videoDatabase.videoDao.getVideoById(id)
     }
 }

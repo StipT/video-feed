@@ -2,16 +2,18 @@ package hr.tostipanic.video_feed.di
 
 import android.app.Application
 import androidx.room.Room
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import hr.tostipanic.video_feed.BuildConfig.URL_API
+import hr.tostipanic.video_feed.BuildConfig
 import hr.tostipanic.video_feed.features.video_feed.data.local.VideoDatabase
 import hr.tostipanic.video_feed.features.video_feed.data.remote.VideoFeedApi
 import hr.tostipanic.video_feed.features.video_feed.data.repository.FeedRepositoryImpl
 import hr.tostipanic.video_feed.features.video_feed.domain.repository.FeedRepository
 import hr.tostipanic.video_feed.features.video_feed.domain.use_case.GetVideoFeedUseCase
+import hr.tostipanic.video_feed.features.video_feed.domain.use_case.GetVideoPostUseCase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,7 +25,16 @@ private const val TIME_OUT = 30L
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object TestAppModule {
+
+    @Provides
+    @Singleton
+    fun provideVideoDatabase(app: Application): VideoDatabase {
+        return Room.inMemoryDatabaseBuilder(
+            app,
+            VideoDatabase::class.java,
+        ).build()
+    }
 
     @Provides
     @Singleton
@@ -41,7 +52,7 @@ object AppModule {
     @Singleton
     fun createRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(URL_API)
+            .baseUrl(BuildConfig.URL_API)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
@@ -52,26 +63,23 @@ object AppModule {
         return retrofit.create(VideoFeedApi::class.java)
     }
 
-
     @Provides
     @Singleton
-    fun provideVideoDatabase(app: Application): VideoDatabase {
-        return Room.databaseBuilder(
-            app,
-            VideoDatabase::class.java,
-            VideoDatabase.DATABASE_NAME
-        ).build()
+    fun provideVideoRepository(api: VideoFeedApi, db: VideoDatabase): FeedRepository {
+        return FeedRepositoryImpl(api, db)
     }
 
     @Provides
     @Singleton
-    fun createFeedRepository(apiService: VideoFeedApi, roomService: VideoDatabase): FeedRepository {
-        return FeedRepositoryImpl(apiService, roomService)
+    fun provideGetVideoFeedUseCase(repository: FeedRepository): GetVideoFeedUseCase {
+        return GetVideoFeedUseCase(repository)
     }
 
     @Provides
     @Singleton
-    fun createGetFeedUseCase(feedRepository: FeedRepository): GetVideoFeedUseCase {
-        return GetVideoFeedUseCase(feedRepository)
+    fun provideGetVideoPostdUseCase(repository: FeedRepository): GetVideoPostUseCase {
+        return GetVideoPostUseCase(repository)
     }
+
+    
 }
