@@ -21,7 +21,7 @@ class VideoPlayerViewModel @Inject constructor(
 
     private val _state = mutableStateOf(VideoPlayerState())
     val state: State<VideoPlayerState> = _state
-    private var currentNoteId: Int? = null
+    private var currentVideoId: Int? = null
 
     init {
         savedStateHandle.get<String>("videoId")?.let { videoId ->

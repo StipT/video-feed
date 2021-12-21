@@ -17,5 +17,5 @@ interface VideoDao {
     suspend fun getVideoById(id: Int): Video?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun storeFeed(note: List<Video>)
+    suspend fun storeFeed(video: List<Video>)
 }

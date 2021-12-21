@@ -7,6 +7,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -19,14 +22,16 @@ import hr.tostipanic.video_feed.features.video_feed.domain.model.Video
 @Composable
 fun VideoFeedItem(
     videoPost: Video,
-    onItemClick: (Video) -> Unit
+    onItemClick: (Video) -> Unit,
+    index: Int
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
             .clickable { onItemClick(videoPost) }
-            .padding(20.dp),
+            .padding(20.dp)
+            .testTag("feedItem${index}"),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
@@ -44,13 +49,14 @@ fun VideoFeedItem(
                 ),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 3,
-                modifier = Modifier.weight(2f)
+                modifier = Modifier.weight(2f).testTag("feedItemTitle${index}")
             )
             Text(
                 text = "Views: ${videoPost.views}",
                 modifier = Modifier
                     .weight(1f)
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 10.dp)
+                    .weight(2f).testTag("feedItemViews${index}"),
                 maxLines = 2,
                 style = TextStyle(
                     fontWeight = FontWeight.Normal,
@@ -67,6 +73,7 @@ fun VideoFeedItem(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize()
+                .weight(2f).testTag("feedItemImage${index}"),
         )
 
 
